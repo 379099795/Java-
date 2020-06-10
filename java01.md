@@ -3932,4 +3932,851 @@ public class TestArryList {
 - valu不唯一无序
 
 # Java 11
+## LinkedList
 
+```java
+package com.kangsdan.Linklist;
+
+import java.util.LinkedList;
+/*
+运行结果不变
+
+结构不同
+底层的实现不同
+操作的过程不同（添加的过程不同
+integers.add(3,5);
+ArrayList需要大量的后裔
+LinkList  创建节点修改指针
+随机访问A
+添加
+
+Linked增加了最后
+ */
+public class TestArrayList {
+    public static void main(String[] args) {
+        //创建Linke
+        //List 推荐的书写方式
+        LinkedList<Integer> integers = new LinkedList<>();
+        integers.add(3);
+        integers.add(4);
+        integers.add(5);
+        integers.add(7);
+        integers.add(3,5);
+        for (int i = 0; i < integers.size(); i++) System.out.print(integers.get(i));
+
+    }
+}
+
+```
+
+![image-20200607111911471](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20200607111911471.png)
+
+```java
+package com.kangsdan.Linklist;
+
+import java.util.LinkedList;
+
+public class TestLink {
+    public static void main(String[] args) {
+        LinkedList<Integer> integers = new LinkedList<>();
+        /*
+         public LinkedList() {
+        }
+         */
+
+        /*
+        public class LinkedList<E>
+        extends AbstractSequentialList<E>
+        implements List<E>
+         */
+
+        /*
+         transient int size = 0;
+         transient Node<E> first;
+         transient Node<E> last;
+         */
+
+        /*每个节点的
+        private static class Node<E> {
+        E item;数据
+        Node<E> next;下一个节点
+        Node<E> prev;上一个节点
+
+        Node(Node<E> prev, E element, Node<E> next) {
+            this.item = element;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
+         */
+
+        integers.add(1);
+        /*
+        public boolean add(E e) {
+        linkLast(e);
+        return true;
+   	 	}
+        */
+        
+        /*
+        void linkLast(E e) {/1
+        final Node<E> l = last;//null
+        final Node<E> newNode = new Node<>(l, e, null);
+        last = newNode;//地址
+        if (l == null)
+            first = newNode;//地址
+        else
+            l.next = newNode;
+        size++;
+
+         */
+        integers.add(2);
+        integers.add(3);
+        integers.add(4);
+    }
+}
+
+```
+
+## Set
+
+- Hashset
+
+1. 采用哈希表存储结构（神奇的结构
+2. 优点：添加快，查询快，删除快
+3. 缺点：无序
+
+- LinkedHashSet
+
+1. 使用哈希表存储结构，同时使用链表维护顺序
+2. 有序（添加顺序
+
+- TreeSet
+
+1. 采用二叉树
+2. 有序，查询的熟读比List快（按内容查询
+3. 速度没Hashset快
+
+![image-20200607143835723](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20200607143835723.png)
+
+![image-20200607144739480](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20200607144739480.png)
+
+### 二叉树->左小右边大，下小上大
+
+2**10,就10次
+
+### Hash表
+
+- test1
+
+```java
+import java.util.*;
+
+/*
+存储课程
+
+底层是hash表，无序不重复的
+ */
+
+/*
+这些都是List新增加的方法  set方法没有。™都是Clo的特性
+add(i,elem);
+remove(i);
+set(i,elem);
+get(i)
+ */
+public class TestSet2 {
+    public static void main(String[] args) {
+        //创建set
+        //是hash表，无序不重复的
+        //HashSet<String> hashSet=new HashSet<String>();
+        //有序
+       // LinkedHashSet<String> hashSet=new LinkedHashSet<String>();
+        //速度比较快，介于线性表和哈希表之间。有序（自然顺序
+        Set<String> hashSet = new TreeSet<>();
+        //存储
+        hashSet.add("java");
+        hashSet.add("java01");
+        hashSet.add("oracle");
+        hashSet.add("html");
+        hashSet.add("java");
+
+        //输出
+        System.out.println(hashSet.size());
+        System.out.println(hashSet.toString());
+        //遍历
+        for(String course:hashSet){
+            System.out.print(course+ " ");
+        }
+        System.out.println();
+        Iterator<String> iterator = hashSet.iterator();
+        while (iterator.hasNext() ) {
+            String a = iterator.next();
+            System.out.print(a);
+        }
+        for (int i = 0; i < hashSet.size(); i++) {
+            //无序的  没有提供与set有管的方法
+        }
+    }
+}
+```
+
+- test02
+
+```java
+package com.kangsdan.entity;
+
+import java.util.Objects;
+
+/*
+学生类
+ */
+public class Student implements Comparable<Student>{
+    private int snm;
+    private String name;
+    private int age;
+    private double score;
+    public Student() {
+    }
+    public Student(int snm, String name, int age, double score) {
+        this.snm = snm;
+        this.name = name;
+        this.age = age;
+        this.score = score;
+    }
+
+    public int getSnm() {
+        return snm;
+    }
+
+    public void setSnm(int snm) {
+        this.snm = snm;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "snm=" + snm +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", score=" + score +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {//实现唯一
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return snm == student.snm &&
+                age == student.age &&
+                Double.compare(student.score, score) == 0 &&
+                name.equals(student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(snm, name, age, score);
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        //>0 大于
+        //=0 相同
+       // 按照学号排序
+        return this.snm-o.snm;
+        //不能强转int  相同就不记了
+        // return this.name.compareTo(o.name);
+        //对于Double的类型可以用if  else配合使用
+    }
+}
+
+```
+
+```java
+package com.kangsdan.set;
+
+import com.kangsdan.entity.Student;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+/*
+问题了，有重复的学生  因为他是地址
+String是系统。学生是自定义，我们的自定义，没有实现
+问题  TreeSet  学生的时候报错
+1.如果放入hashCode和LinkedHashcode必须重写hashCode  和equals
+2.如果放入二叉树的结构  必须实现2个接口之一
+Comparable 或者 Comparator
+
+Comparable内部比较器只有一种常用的比较
+Comparator可有多个
+
+ */
+public class TestSet1 {
+    public static void main(String[] args) {
+        //创建set
+        //Set<Student> set=new HashSet<Student>();//泛型的相当重要
+        Set<Student> set =new TreeSet<Student>();
+        //存储
+        Student student =new Student(1,"张山",12,98);
+        Student student1 =new Student(2,"康丹丹",20,99.5);
+        Student student2 =new Student(3,"sd",12,56);
+        Student student3 =new Student(4,"lk",12,15.5);
+        //Student student4 =new Student(1,"张山",12,98);//由于地址不同，所以不同
+        Student student4=student;//体现比较的是地址,重写equals和 hashCode就ok
+        set.add(student);
+        set.add(student1);
+        set.add(student2);
+        set.add(student3);
+        set.add(student4);
+
+        //输出
+        System.out.println(set.size());
+        System.out.println(set);
+        for (Student st:set) {
+            System.out.println(st);
+            
+        }
+    }
+}
+
+```
+
+# Java 12
+
+```java
+package com.kangsdan.set;
+
+import com.kangsdan.entity.Student;
+
+import java.util.Comparator;
+
+public class StuScoreComp implements Comparator<Student> {
+
+
+    @Override
+    public int compare(Student o1, Student o2) {
+        double a= -(o1.getScore()-o2.getScore());
+            if(a>0){
+                return 1;
+            }
+            if (a<0){
+                return -1;
+            }else {
+                return o1.getSnm()-o2.getSnm();
+            }
+    }
+}
+
+```
+
+
+
+```java
+package com.kangsdan.set;
+
+import com.kangsdan.entity.Student;
+
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+/*
+问题了，有重复的学生  因为他是地址
+String是系统。学生是自定义，我们的自定义，没有实现
+问题  TreeSet  学生的时候报错
+1.如果放入hashCode和LinkedHashcode必须重写hashCode  和equals
+2.如果放入二叉树的结构  必须实现2个接口之一
+Comparable 或者 Comparator
+
+如果外部比较器只使用一次。建议使用内部匿名勒
+ */
+public class TestSet1 {
+    public static void main(String[] args) {
+        //创建set
+        //Set<Student> set=new HashSet<Student>();//泛型的相当重要
+        Set<Student> set =new TreeSet<Student>();
+        //存储
+        Student student =new Student(1,"张山",12,98);
+        Student student1 =new Student(2,"康丹丹",20,99.5);
+        Student student2 =new Student(3,"sd",12,56);
+        Student student3 =new Student(4,"lk",12,15.5);
+        //Student student4 =new Student(1,"张山",12,98);//由于地址不同，所以不同
+        Student student4=student;//体现比较的是地址,重写equals和 hashCode就ok
+        set.add(student);
+        set.add(student1);
+        set.add(student2);
+        set.add(student3);
+        set.add(student4);
+
+        //输出
+        System.out.println(set.size());
+        System.out.println(set);
+        for (Student st:set) {
+            System.out.println(st);
+        }
+        //使用外部比较器
+        Comparator<Student> comparator=new StuComParto();
+        Set<Student> set1=new TreeSet<>(comparator);
+        set1.add(student);
+        set1.add(student1);
+        set1.add(student2);
+        set1.add(student3);
+        set1.add(student4);
+
+
+        for (Student st:set1) {
+            System.out.println(st);
+        }
+//按照成绩  然后相同按学号
+//        Comparator<Student> comparator1=new StuScoreComp();
+//        Set<Student> set2=new TreeSet<>(comparator1);
+//        set2.add(student);
+//        set2.add(student1);
+//        set2.add(student2);
+//        set2.add(student3);
+//        set2.add(student4);
+//
+//        for (Student s:set2
+//             ) {
+//            System.out.println(s);
+//        }
+        Comparator<Student> comparator1=new StuScoreComp();
+        Set<Student> set2=new TreeSet<Student>(new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                double a= -(o1.getScore()-o2.getScore());
+                if(a>0){
+                    return 1;
+                }
+                if (a<0){
+                    return -1;
+                }else {
+                    return o1.getSnm()-o2.getSnm();
+                }
+            }
+        });
+        set2.add(student);
+        set2.add(student1);
+        set2.add(student2);
+        set2.add(student3);
+        set2.add(student4);
+
+        for (Student s:set2) {
+            System.out.println(s);
+        }
+
+    }
+}
+```
+
+- ArrayList 不是按照这个来比较的是所以不需要
+- HashSet本身就是无序的所有不需要
+- TreeSet  就可以使用双Com另外比较器来实现 Comparable   Comparator
+
+## HashSet
+
+
+
+- 使用带有hash表的时候，我们就必须
+- 重写  equals    hashCode
+
+### 特点
+
+- 哈希表的结构特点
+- 快 
+- 结构有多种
+- ![image-20200608113213169](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20200608113213169.png)
+- 主结构是应该顺序表
+- 每一个顺序表引出应该链表
+
+## 添加数据
+
+- 理论上只需要计算
+- 计算哈希码（hashCode     整数的hash码就是他本身   算出来的位置就是他的存储位置  (x%11)
+
+| 23        | 36        | 48      | 86        |
+| --------- | --------- | ------- | --------- |
+| x%11    1 | x%11    3 | x%11  4 | x%11    9 |
+|           |           |         |           |
+|           |           |         |           |
+
+| 0    | 1    | 2        | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+| ---- | ---- | -------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+|      | 23   | 36\|地址 |      | 48   |      |      |      |      | 86   |
+
+| 创建链表       | 67 \|地址 |      |      |      |      |      |      |      |      |
+| -------------- | --------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 就可以继续存储 | 56\|null  |      |      |      |      |      |      |      |      |
+
+
+
+- 如果已经存在的数据 发生了冲突
+- 冲突只可以减少
+- 如果发生了就调用冲突了就调用equals（） 调用比较内容是否相同
+- 一次添加 多次添加（链表） 不添加
+
+## 查询数据
+
+- 一次找到（利用hashcode计算地址
+- 多次查找  链表
+- 找不到
+- 3步 利用hashCode计算hash码，利用hash码计算地址  索引
+- con包含
+
+## HashCode将计算为hash码   equals判断是否相同
+
+## 面试 快速
+
+
+
+## 各种类型的hash然后写
+
+# Java13
+
+```java
+public static int hashCode(Object a[]) {
+        if (a == null)
+            return 0;
+
+        int result = 1;
+
+        for (Object element : a)
+            result = 31 * result + (element == null ? 0 : element.hashCode());
+
+        return result;
+    }
+```
+
+```java
+public class Test5 {
+    public static void main(String[] args) {
+        /*
+         public native int hashCode();
+         */
+        Object object;//hashCode()是public方法，任何都可以重写
+        /*
+        public static int hashCode(int value) {
+        return value;
+        }
+         */
+        Integer integer;//是他本身
+        Double d;//算法如此的高深莫测，经量让不同的double产生不同的
+        /*
+         public static int hashCode(double value) {
+        long bits = doubleToLongBits(value);
+        return (int)(bits ^ (bits >>> 32));
+        }
+         */
+        /*
+        String 是将ascii码与位置联合来完成hashCode
+
+         */
+        /*
+        public int hashCode() {
+        int h = hash;
+        if (h == 0 && value.length > 0) {
+            char val[] = value;
+
+            for (int i = 0; i < value.length; i++) {
+                h = 31 * h + val[i];
+            }
+            hash = h;
+        }
+        return h;
+        }
+         */
+        String str;
+
+    }
+}
+```
+
+![image-20200609101128404](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20200609101128404.png)
+
+要存的个数/总的个数=填充因子（0.5最佳   0.75增加
+
+## hash函数的选择
+
+![image-20200609101303802](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20200609101303802.png)
+
+- 1.7之前都是使用对11取余
+
+## 大于八个的链就会使用红黑树0
+
+![image-20200609101600405](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20200609101600405.png)
+
+jdk8之后
+
+## MAP
+
+- KEY-value
+- Set的底层是Map
+
+### HashMap
+
+```java
+package com.kangsdan.TestMap;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/*
+存储对应的国家和名称的映射
+key---value
+jp-japan
+cn---china
+ */
+
+/*
+底层是hashtable   查询快 无序
+key 无序的 唯一的
+value  无序  不唯一  Connection
+
+ */
+public class TestMap {
+
+    public static void main(String[] args) {
+        //创建MAP对象 键值对
+        Map<String,String> map=new HashMap<String,String>();
+        //存储对象
+        map.put("cn","ch");
+        map.put("uk","英国");
+        map.put("usa","美国");
+        map.put("usa","下妹");//只保存一个，而其会替换前一个
+        //输出
+        System.out.println(map.size());
+        System.out.println(map);
+    }
+}
+
+```
+
+### LinkedHashMap
+
+```java
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+/*
+存储对应的国家和名称的映射
+key---value
+jp-japan
+cn---china
+ */
+
+/*
+底层是hashtable +链表    查询快 无序
+key 有序的 不唯一的
+value  无序  不唯一 COLLECTION
+
+ */
+public class TestMap {
+
+    public static void main(String[] args) {
+        //创建MAP对象 键值对
+        Map<String,String> map=new LinkedHashMap<String,String>();
+        //存储对象
+        map.put("cn","ch");
+        map.put("uk","英国");
+        map.put("usa","美国");
+        map.put("usa","下妹");//只保存一个，而其会替换前一个
+        //输出
+        System.out.println(map.size());
+        System.out.println(map);
+    }
+}
+```
+
+### TreeMap
+
+```java
+import java.util.Map;
+import java.util.TreeMap;
+
+/*
+存储对应的国家和名称的映射
+key---value
+jp-japan
+cn---china
+ */
+
+/*
+TreeMap  底层是红黑树，介于hash和线性表之间
+key  有序（自然顺序  唯一
+ */
+public class TestMap {
+
+    public static void main(String[] args) {
+        //创建MAP对象 键值对
+        Map<String,String> map=new TreeMap<String,String>();
+        //存储对象
+        map.put("cn","ch");
+        map.put("uk","英国");
+        map.put("usa","美国");
+        map.put("usa","下妹");//只保存一个，而其会替换前一个
+        //输出
+        System.out.println(map.size());
+        System.out.println(map);
+    }
+}
+
+```
+
+- 共同特点都是存储key-value的键值对
+
+```java
+import java.util.*;
+
+/*
+存储对应的国家和名称的映射
+key---value
+jp-japan
+cn---china
+ */
+
+/*
+TreeMap  底层是红黑树，介于hash和线性表之间
+key  有序（自然顺序  唯一
+ */
+public class TestMap {
+
+    public static void main(String[] args) {
+        //创建MAP对象 键值对
+        Map<String,String> map=new TreeMap<String,String>();
+        //存储对象
+        map.put("cn","ch");
+        map.put("uk","英国");
+        map.put("usa","美国");
+        map.put("usa","下妹");//只保存一个，而其会替换前一个
+        //输出
+        System.out.println(map.size());
+        System.out.println(map);
+        String value=map.get("usa");//key和value是   可不是索引  是计算哈希码 按照哈希码索引地址
+        System.out.println(value);
+/*
+map没有迭代器  只有先变为set
+ */
+        //遍历所有的Map  ：先得到所有的key  所著成的set   根据key 得到value
+        System.out.println(map.keySet());
+        System.out.println(map.values());
+        //转变set
+        Set<String> keySet=map.keySet();
+        for (String a:keySet) {
+            System.out.println(map.get(a));
+        }
+        System.out.println("*************************************");
+        Iterator<String> iterator = keySet.iterator();
+        while (iterator.hasNext()){
+            System.out.println(map.get(iterator.next()));
+        }
+        //根据key 计算value
+        Set<Map.Entry<String, String>> entries = map.entrySet();//Map接口中的内部接口
+        Iterator<Map.Entry<String, String>> iterator1 = entries.iterator();
+        while (iterator1.hasNext()){
+            Map.Entry<String, String> next = iterator1.next();//最新的方式
+            System.out.println(next);
+            System.out.println(next.getKey() + "===========>" + next.getValue());
+            //System.out.println(iterator1.next());
+        }
+    }
+}
+```
+
+
+
+```java
+package com.kangsdan.TestMap;
+
+import com.kangsdan.entity.Student;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+//remove可以删除指定的key
+//replace(1,stu1)
+/*
+学号和学生信息之间的Map
+ */
+public class TestMap02 {
+    public static void main(String[] args) {
+        Student student=new Student(1,"kdd",12,88.56);
+        Student student1=new Student(4,"lht",12,88.56);
+        Map<Integer,Student> map=new  HashMap<Integer, Student>();
+        map.put(student.getSnm(),student);
+        map.put(student1.getSnm(),student1);
+        map.clear();
+        System.out.println(map.isEmpty());
+        System.out.println(map.size());
+        System.out.println(map.containsKey(1));
+        map.containsValue(student1);
+        //System.out.println(map);
+        Set<Map.Entry<Integer, Student>> entries = map.entrySet();
+        Iterator<Map.Entry<Integer, Student>> iterator = entries.iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next().getValue());
+        }
+        Set<Integer> set=map.keySet();
+        System.out.println(set);
+        for (int a:set
+             ) {
+            System.out.println(map.get(a));
+        }
+    }
+}
+/*
+删除修改
+查询
+修改
+ */
+```
+
+- 高级应用
+
+
+
+```java
+
+```
+
+## 底层是深度认识与探究
+
+## Entry 
+
+![image-20200609171719615](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20200609171719615.png)
+
+```java
+ public HashSet() {
+        map = new HashMap<>();
+    }
+```
+
+- 更多底层需要选哟会看
